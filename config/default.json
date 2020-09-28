@@ -1,7 +1,0 @@
-{
-  "host": "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com",
-  "database": "ddk08jiurff4r6",
-  "user": "qtpcaeruebhban",
-  "port": 5432,
-  "password": "3c6d9bf70b295ef0225b79f8a415307f3b1365912ef2251f59212bf992492e0c"
-}
