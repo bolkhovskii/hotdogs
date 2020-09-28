@@ -1,0 +1,22 @@
+{
+  "name": "hotdogs",
+  "version": "1.0.0",
+  "description": "node react redux postgres",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bolkhovskii/hotdogs.git"
+  },
+  "keywords": [
+    "pern"
+  ],
+  "author": "Bolkhovskyi (bolkhovskiy.a@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bolkhovskii/hotdogs/issues"
+  },
+  "homepage": "https://github.com/bolkhovskii/hotdogs#readme"
+}
