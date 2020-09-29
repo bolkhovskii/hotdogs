@@ -7,14 +7,6 @@ const KoaBody = require("koa-body");
 const routers = new Router();
 koaBody = convert(KoaBody());
 
-// routers.get("/exampleee", async (ctx, next) => {
-//   const user = await models.User.findAll();
-
-//   ctx.body = { user };
-// });
-
-//Authorization
-
 routers
   .get("/login", async (ctx, next) => {
     const user = await models.User.findAll();
