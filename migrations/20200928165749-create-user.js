@@ -23,6 +23,16 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false,
+        validate: {
+          len: {
+            args: [6, 99],
+            msg: "Please use a longer password (6 or more symbols)",
+          },
+        },
+      },
+      salt: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       phone: {
         type: Sequelize.STRING,
