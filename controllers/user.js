@@ -1,16 +1,15 @@
 const Sequelize = require("sequelize");
 const Router = require("koa-router");
 const models = require("../models/index");
-const _ = require("lodash");
 
 function getByUserEmail(req, res) {
-  models.Customer.findAll({
+  models.User.findAll({
     attributes: ["id"],
     where: {
       email: req.query.email,
     },
-  }).then((customer) => {
-    const isExist = !_.isEmpty(customer);
+  }).then((User) => {
+    const isExist = !_.isEmpty(User);
     res.status(200).json({ isExist });
   });
 }
