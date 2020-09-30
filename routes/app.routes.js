@@ -1,24 +1,21 @@
 const convert = require("koa-convert");
 const KoaBody = require("koa-body");
 const Router = require("koa-router");
-const verifySignUp = require("./verifySignUp");
-const authJwt = require("./verifyJwtToken");
+const passport = require('koa-passport')
+
 const authController = require("../controllers/auth");
 
 const userController = require("../controllers/user");
-const routers = new Router();
-
-//Authorization
+const routers = new Router().prefix('/api');
 
 routers
-  .get("/users", authJwt.verifyToken, userController.getAllUsers)
+  //users
+  .get("/users", passport.authenticate('jwt', { session: false }), userController.getAllUsers)
   .post("/register", KoaBody(), userController.addNewUser)
   .delete("/user/:id", convert(KoaBody()), userController.deleteUserById)
-  .post(
-    "/api/auth/signup",
-    verifySignUp.checkDuplicateUserNameOrEmail,
-    authController.signup
-  )
-  .post("/api/auth/signin", authController.signin);
+
+  //Authorization
+  .post("/auth/signup", authController.signUp) 
+  .post("/auth/signin", authController.signIn);
 
 module.exports = routers;

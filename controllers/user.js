@@ -2,18 +2,6 @@ const Sequelize = require("sequelize");
 const Router = require("koa-router");
 const models = require("../models/index");
 
-function getByUserEmail(req, res) {
-  models.User.findAll({
-    attributes: ["id"],
-    where: {
-      email: req.query.email,
-    },
-  }).then((User) => {
-    const isExist = !_.isEmpty(User);
-    res.status(200).json({ isExist });
-  });
-}
-
 async function getAllUsers(ctx, next) {
   const user = await models.User.findAll();
   ctx.body = { user };
@@ -38,30 +26,7 @@ async function deleteUserById(ctx, next) {
 }
 
 module.exports = {
-  getByUserEmail,
   getAllUsers,
   addNewUser,
   deleteUserById,
 };
-
-//   routers
-//   .get(userController.getByCustomerEmail);
-
-//   .delete("/user/:id", async (ctx, next) => {
-//     ctx.status = 204;
-//     await models.User.destroy({
-//       where: {
-//         id: ctx.params.id, //this will be your id that you want to delete
-//       },
-//     }).then(
-//       function (rowDeleted) {
-//         // rowDeleted will return number of rows deleted
-//         if (rowDeleted === 1) {
-//           console.log("Deleted successfully");
-//         }
-//       },
-//       function (err) {
-//         console.log(err);
-//       }
-//     );
-//   });
