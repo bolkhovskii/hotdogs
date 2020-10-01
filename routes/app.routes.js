@@ -9,7 +9,10 @@ const authController = require("../controllers/auth");
 const userController = require("../controllers/user");
 const routers = new Router().prefix("/api");
 
-const { loginValidator } = require("../config/param-validation");
+const {
+  loginValidator,
+  registerValidator,
+} = require("../config/param-validation");
 const { Joi } = require("koa-joi-router");
 
 routers
@@ -23,7 +26,7 @@ routers
   .delete("/user/:id", convert(KoaBody()), userController.deleteUserById)
 
   //Authorization
-  .post("/auth/signup", authController.signUp)
+  .post("/auth/signup", registerValidator, authController.signUp)
   // .post(
   //   "/auth/signin",
   //   validate({
