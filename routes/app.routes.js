@@ -7,13 +7,17 @@ const validate = require("koa-joi-validate");
 
 const authController = require("../controllers/auth");
 const userController = require("../controllers/user");
+const dishController = require("../controllers/dish");
 const routers = new Router().prefix("/api");
 
 const {
   loginValidator,
   registerValidator,
+  createValidation,
+  readValidation,
+  updateValidation,
+  deleteValidation,
 } = require("../config/param-validation");
-const { Joi } = require("koa-joi-router");
 
 routers
   //users
@@ -27,15 +31,33 @@ routers
 
   //Authorization
   .post("/auth/signup", registerValidator, authController.signUp)
-  // .post(
-  //   "/auth/signin",
-  //   validate({
-  //     body: {
-  //       email: Joi.string().email().min(6),
-  //     },
-  //   }),
-  //   authController.signIn
-  // );
-  .post("/auth/signin", loginValidator, authController.signIn);
+  .post("/auth/signin", loginValidator, authController.signIn)
+
+  //Dishes CRUD
+  .post(
+    "/dish",
+    passport.authenticate("jwt", { session: false }),
+    createValidation,
+    dishController.dishCreate
+  )
+  .get(
+    "/dish",
+    passport.authenticate("jwt", { session: false }),
+    readValidation,
+    dishController.dishRead
+  )
+  .put(
+    "/dish/:id",
+    updateValidation,
+    passport.authenticate("jwt", { session: false }),
+    updateValidation,
+    dishController.dishUpdate
+  )
+  .delete(
+    "/dish/:id",
+    passport.authenticate("jwt", { session: false }),
+    deleteValidation,
+    dishController.dishDelete
+  );
 
 module.exports = routers;
