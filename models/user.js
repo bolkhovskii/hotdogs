@@ -13,38 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [6, 99],
-            msg: "Please use a longer password (6 or more symbols)",
-          },
-        },
-      },
-      phone: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: { isNumeric: true },
-      },
-      salt: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      username: { type: DataTypes.STRING, allowNull: false },
+      email: { type: DataTypes.STRING, allowNull: false },
+      password: { type: DataTypes.STRING, allowNull: false },
     },
     {
       sequelize,
