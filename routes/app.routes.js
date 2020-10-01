@@ -1,26 +1,21 @@
 const convert = require("koa-convert");
 const KoaBody = require("koa-body");
 const Router = require("koa-router");
+const passport = require('koa-passport')
+
+const authController = require("../controllers/auth");
 
 const userController = require("../controllers/user");
-const routers = new Router();
-
-//Authorization
+const routers = new Router().prefix('/api');
 
 routers
-  .get("/users", userController.getAllUsers)
+  //users
+  .get("/users", passport.authenticate('jwt', { session: false }), userController.getAllUsers)
   .post("/register", KoaBody(), userController.addNewUser)
-  .delete("/user/:id", convert(KoaBody()), userController.deleteUserById);
+  .delete("/user/:id", convert(KoaBody()), userController.deleteUserById)
+
+  //Authorization
+  .post("/auth/signup", authController.signUp) 
+  .post("/auth/signin", authController.signIn);
 
 module.exports = routers;
-
-// const paramValidation = require('../config/paramValidation');
-// const customerController = require('../controllers/customer');
-
-// const router = express.Router();  // eslint-disable-line new-cap
-
-// router.route('/')
-//   .get(validate(paramValidation.customer.getByCustomerEmail))
-//   .get(customerController.getByCustomerEmail);
-
-// module.exports = router;

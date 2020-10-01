@@ -1,9 +1,14 @@
 const Koa = require("koa");
-const Sequelize = require("sequelize");
+
+const config = require('./config/config')
+const handlers = require('./handlers')
+const router = require("./routes/app.routes");
 
 const app = new Koa();
 
-const router = require("./routes/app.routes");
-app.use(router.routes()).use(router.allowedMethods());
+handlers.forEach((h) => app.use(h))
 
-app.listen(3000);
+app.use(router.routes())
+app.use(router.allowedMethods());
+
+app.listen(config.port)
