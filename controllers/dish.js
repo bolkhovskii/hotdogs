@@ -7,6 +7,7 @@ const env = process.env.NODE_ENV || "development";
 // const config = require(__dirname + "/../config/config.json")[env];
 const config = require("../config/config");
 
+//POST Создать новый хотдог http://localhost:3000/api/dish
 const dishCreate = async (ctx) => {
   const { pictureName, dishesName, price, description } = ctx.request.body;
 
@@ -17,14 +18,12 @@ const dishCreate = async (ctx) => {
   });
   if (dish) ctx.throw(400, "Dish is already exists");
 
-  //const salt = await bcrypt.genSalt(10);
-  //const hashedPassword = await bcrypt.hashSync(ctx.request.body.password, salt);
-
   await models.Dish.create({ pictureName, dishesName, price, description });
 
   ctx.status = 201;
 };
 
+//GET Получить весь список хотдогов http://localhost:3000/api/dish
 const dishRead = async (ctx) => {
   const dish = await models.Dish.findAll();
   if (!dish) ctx.throw(404, "Not found");
@@ -33,6 +32,7 @@ const dishRead = async (ctx) => {
   ctx.status = 200;
 };
 
+// PUT Обновить хотдог по ИД http://localhost:3000/api/dish/:id
 const dishUpdate = async (ctx) => {
   const { id } = ctx.params;
   const { pictureName, dishesName, price, description } = ctx.request.body;
@@ -53,6 +53,7 @@ const dishUpdate = async (ctx) => {
   ctx.status = 204;
 };
 
+//DELETE Удалить по ИД http://localhost:3000/api/dish/:id
 const dishDelete = async (ctx) => {
   const { id } = ctx.params;
 

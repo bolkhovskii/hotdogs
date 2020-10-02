@@ -48,7 +48,6 @@ routers
   )
   .put(
     "/dish/:id",
-    updateValidation,
     passport.authenticate("jwt", { session: false }),
     updateValidation,
     dishController.dishUpdate
