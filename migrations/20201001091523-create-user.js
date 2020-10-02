@@ -8,11 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: {
+      username: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -21,20 +17,6 @@ module.exports = {
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [6, 99],
-            msg: "Please use a longer password (6 or more symbols)",
-          },
-        },
-      },
-      salt: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      phone: {
         type: Sequelize.STRING,
         allowNull: false,
       },
