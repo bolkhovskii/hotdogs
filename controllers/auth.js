@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const models = require("../models/index");
 
 const env = process.env.NODE_ENV || "development";
-// const config = require(__dirname + "/../config/config.json")[env];
+
 const config = require("../config/config");
 
 const signUp = async (ctx) => {
@@ -44,7 +44,8 @@ const signIn = async (ctx, next) => {
     };
 
     const token = jwt.sign(payload, config.secret, { expiresIn: 3600 * 24 });
-    ctx.body = { auth: true, accessToken: `Bearer ${token}` };
+
+    ctx.body = { auth: true, accessToken: {token} };
   } else {
     ctx.throw(400, "Password incorrect");
   }

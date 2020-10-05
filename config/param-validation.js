@@ -4,7 +4,7 @@ const validate = require("koa-joi-validate");
 // Логин
 const loginValidator = validate({
   body: {
-    email: Joi.string().email().min(6),
+    email: Joi.string().email().min(4),
     password: Joi.string().min(6).max(32).required(),
   },
 });
